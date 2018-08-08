@@ -1,0 +1,31 @@
+<html>
+<body style="text-align: center;">
+  <canvas id="myCanvas" width="600" height="600"></canvas>
+  <script>
+    const ctx = document.getElementById("myCanvas").getContext("2d");
+    ctx.fillStyle='#ff5722';
+    const canvasWidth = 600;
+    const canvasHeight = 600;
+    const R = Math.random() * 230;
+    const r = Math.random() * 130;
+    const d = Math.random() * 100;
+    console.log({R, r, d})
+    const step = 2 * Math.PI / 1000;
+
+    function transformPoint(x, y) {
+      return [x + canvasWidth / 2, -y + canvasHeight / 2];
+    }
+
+    function drawDot(x, y) {
+      ctx.fillRect(...transformPoint(x, y), 1, 1);
+    }
+
+    for (let a = 0; a < 120 * Math.PI; a += step) {
+      const b = a * R / r;
+      const x = Math.cos(a) * (R - r) + d * Math.cos(b);
+      const y = Math.sin(a) * (R - r) - d * Math.sin(b);
+      drawDot(x, y);
+    }
+  </script>
+</body>
+</html>
